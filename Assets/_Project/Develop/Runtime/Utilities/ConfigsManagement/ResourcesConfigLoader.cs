@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using _Project.Develop.Runtime.Utilities.Config_Management.Configs.Scripts;
-using Assets._Project.Develop.Runtime.Configs.Meta.Wallet;
-using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
+using _Project.Develop.Runtime.Configs.Meta.Wallet;
+using _Project.Develop.Runtime.Gameplay.Configs;
+using _Project.Develop.Runtime.Utilities.AssetsManagement;
 using UnityEngine;
 
 

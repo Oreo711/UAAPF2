@@ -1,12 +1,11 @@
 using System.Collections;
 using _Project.Develop.Runtime.Gameplay.Infrastructure;
-using _Project.Develop.Runtime.Meta;
 using _Project.Develop.Runtime.Utilities.CoroutineManagement;
-using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
+using _Project.Develop.Runtime.Utilities.SceneManagement;
 using UnityEngine;
 
 
-namespace _Project.Develop.Runtime.Utilities.CoroutinesManagment.Meta
+namespace _Project.Develop.Runtime.Meta
 {
 	public class GameModeSelectionService
 	{

@@ -1,9 +1,7 @@
-﻿using _Project.Develop.Runtime.Gameplay.Infrastructure;
-using _Project.Develop.Runtime.Infrastructure.DI;
-using Assets._Project.Develop.Runtime.Infrastructure.DI;
-using UnityEngine;
+﻿using _Project.Develop.Runtime.Infrastructure.DI;
 
-namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
+
+namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 {
     public class GameplayContextRegistrations
     {

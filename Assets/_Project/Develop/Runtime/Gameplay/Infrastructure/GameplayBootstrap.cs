@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections;
+using _Project.Develop.Runtime.Gameplay.Configs;
+using _Project.Develop.Runtime.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Stats;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
-using _Project.Develop.Runtime.Utilities.Config_Management.Configs.Scripts;
 using _Project.Develop.Runtime.Utilities.ConfigsManagement;
 using _Project.Develop.Runtime.Utilities.CoroutineManagement;
-using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
-using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
-using Assets._Project.Develop.Runtime.Infrastructure;
-using Assets._Project.Develop.Runtime.Infrastructure.DI;
-using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
-using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
+using _Project.Develop.Runtime.Utilities.DataManagement.DataProviders;
+using _Project.Develop.Runtime.Utilities.SceneManagement;
 using UnityEngine;
 
 
@@ -47,6 +45,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 				_container.Resolve<SceneSwitcherService>(),
 				_container.Resolve<ICoroutinePerformer>(),
 				_container.Resolve<WalletService>(),
+				_container.Resolve<StatsService>(),
 				_container.Resolve<PlayerDataProvider>());
 			_gameplay.Setup();
 

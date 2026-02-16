@@ -1,19 +1,18 @@
-﻿using Assets._Project.Develop.Runtime.Configs.Meta.Wallet;
-using Assets._Project.Develop.Runtime.Meta.Features.Wallet;
-using Assets._Project.Develop.Runtime.Utilities.Reactive;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using _Project.Develop.Runtime.Configs.Meta.Wallet;
+using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.Utilities.ConfigsManagement;
 
 
-namespace Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders
+namespace _Project.Develop.Runtime.Utilities.DataManagement.DataProviders
 {
     public class PlayerDataProvider : DataProvider<PlayerData>
     {
         private readonly ConfigProviderService _configProviderService;
 
         public PlayerDataProvider(
-            ISaveLoadSerivce saveLoadService,
+            ISaveLoadService saveLoadService,
             ConfigProviderService configProviderService) : base(saveLoadService)
         {
             _configProviderService = configProviderService;

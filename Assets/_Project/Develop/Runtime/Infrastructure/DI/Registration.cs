@@ -1,8 +1,7 @@
 ﻿using System;
-using _Project.Develop.Runtime.Infrastructure.DI;
 
 
-namespace Assets._Project.Develop.Runtime.Infrastructure.DI
+namespace _Project.Develop.Runtime.Infrastructure.DI
 {
     public class Registration : IRegistrationOptions
     {

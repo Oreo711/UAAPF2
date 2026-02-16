@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections;
 
-namespace Assets._Project.Develop.Runtime.Utilities.DataManagment.DataRepository
+
+namespace _Project.Develop.Runtime.Utilities.DataManagement.DataRepository
 {
     public interface IDataRepository
     {

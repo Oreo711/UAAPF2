@@ -1,25 +1,22 @@
 ﻿using System.Collections;
-using _Project.Develop.Runtime.Gameplay.Infrastructure;
+using _Project.Develop.Runtime.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
-using _Project.Develop.Runtime.Meta;
+using _Project.Develop.Runtime.Meta.Features.Stats;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.Utilities.CoroutineManagement;
-using Assets._Project.Develop.Runtime.Infrastructure;
-using Assets._Project.Develop.Runtime.Infrastructure.DI;
-using Assets._Project.Develop.Runtime.Meta.Features.Wallet;
-using Assets._Project.Develop.Runtime.Meta.Infrastructure;
-using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
-using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
+using _Project.Develop.Runtime.Utilities.DataManagement.DataProviders;
+using _Project.Develop.Runtime.Utilities.SceneManagement;
 using UnityEngine;
 
 
-namespace _Project.Develop.Runtime.Utilities.CoroutinesManagment.Meta.Infrastructure
+namespace _Project.Develop.Runtime.Meta.Infrastructure
 {
     public class MainMenuBootstrap : SceneBootstrap
     {
         private DIContainer _container;
 
         private WalletService _walletService;
+        private StatsService  _statsService;
 
         private PlayerDataProvider       _playerDataProvider;
         private ICoroutinePerformer      _coroutinePerformer;
@@ -35,6 +32,7 @@ namespace _Project.Develop.Runtime.Utilities.CoroutinesManagment.Meta.Infrastruc
         public override IEnumerator Initialize()
         {
             _walletService = _container.Resolve<WalletService>();
+            _statsService = _container.Resolve<StatsService>();
 
             _playerDataProvider       = _container.Resolve<PlayerDataProvider>();
             _coroutinePerformer       = _container.Resolve<ICoroutinePerformer>();
@@ -67,6 +65,24 @@ namespace _Project.Develop.Runtime.Utilities.CoroutinesManagment.Meta.Infrastruc
             if (Input.GetKeyDown(KeyCode.R))
             {
                 Debug.Log($"Current balance: {_walletService.GetCurrency(CurrencyTypes.Gold).Value.ToString()}");
+                Debug.Log($"Current wins: {_statsService.Wins.ToString()}; Current losses: {_statsService.Losses.ToString()}");
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha0))
+            {
+                if (_walletService.Enough(CurrencyTypes.Gold, _statsService.ResetCost))
+                {
+                    _walletService.Spend(CurrencyTypes.Gold, _statsService.ResetCost);
+                    _statsService.Reset();
+
+                    _coroutinePerformer.StartCoroutine(_playerDataProvider.Save());
+
+                    Debug.Log("Stats have been reset.");
+                }
+                else
+                {
+                    Debug.Log("Insufficient gold");
+                }
             }
         }
     }

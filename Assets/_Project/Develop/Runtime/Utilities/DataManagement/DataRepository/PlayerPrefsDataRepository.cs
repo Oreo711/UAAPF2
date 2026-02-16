@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Assets._Project.Develop.Runtime.Utilities.DataManagment.DataRepository
+
+namespace _Project.Develop.Runtime.Utilities.DataManagement.DataRepository
 {
     public class PlayerPrefsDataRepository : IDataRepository
     {

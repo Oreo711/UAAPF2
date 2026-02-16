@@ -1,5 +1,5 @@
 ﻿using _Project.Develop.Runtime.Meta;
-using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
+using _Project.Develop.Runtime.Utilities.SceneManagement;
 
 
 namespace _Project.Develop.Runtime.Gameplay.Infrastructure

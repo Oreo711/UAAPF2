@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Stats;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
+using _Project.Develop.Runtime.Utilities.AssetsManagement;
 using _Project.Develop.Runtime.Utilities.ConfigsManagement;
 using _Project.Develop.Runtime.Utilities.CoroutineManagement;
+using _Project.Develop.Runtime.Utilities.DataManagement;
+using _Project.Develop.Runtime.Utilities.DataManagement.DataProviders;
 using _Project.Develop.Runtime.Utilities.DataManagement.DataRepository;
+using _Project.Develop.Runtime.Utilities.DataManagement.KeysStorage;
 using _Project.Develop.Runtime.Utilities.DataManagement.Serializers;
-using Assets._Project.Develop.Runtime.Meta.Features.Wallet;
-using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
-using Assets._Project.Develop.Runtime.Utilities.DataManagment;
-using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
-using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataRepository;
-using Assets._Project.Develop.Runtime.Utilities.DataManagment.KeysStorage;
-using Assets._Project.Develop.Runtime.Utilities.DataManagment.Serializers;
-using Assets._Project.Develop.Runtime.Utilities.LoadingScreen;
-using Assets._Project.Develop.Runtime.Utilities.Reactive;
-using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
+using _Project.Develop.Runtime.Utilities.LoadingScreen;
+using _Project.Develop.Runtime.Utilities.Reactive;
+using _Project.Develop.Runtime.Utilities.SceneManagement;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -41,11 +39,18 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
 
             container.RegisterAsSingle(CreatePlayerDataProvider);
 
-            container.RegisterAsSingle<ISaveLoadSerivce>(CreateSaveLoadService);
+            container.RegisterAsSingle<ISaveLoadService>(CreateSaveLoadService);
+
+            container.RegisterAsSingle(CreateStatsService).NonLazy();
+        }
+
+        private static StatsService CreateStatsService (DIContainer c)
+        {
+            return new StatsService(c.Resolve<PlayerDataProvider>());
         }
 
         private static PlayerDataProvider CreatePlayerDataProvider(DIContainer c)
-            => new PlayerDataProvider(c.Resolve<ISaveLoadSerivce>(), c.Resolve<ConfigProviderService>());
+            => new PlayerDataProvider(c.Resolve<ISaveLoadService>(), c.Resolve<ConfigProviderService>());
 
         private static SaveLoadService CreateSaveLoadService(DIContainer c)
         {

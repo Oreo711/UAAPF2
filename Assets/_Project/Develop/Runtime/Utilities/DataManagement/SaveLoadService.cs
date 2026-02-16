@@ -1,12 +1,13 @@
-﻿using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataRepository;
-using Assets._Project.Develop.Runtime.Utilities.DataManagment.KeysStorage;
-using Assets._Project.Develop.Runtime.Utilities.DataManagment.Serializers;
-using System;
+﻿using System;
 using System.Collections;
+using _Project.Develop.Runtime.Utilities.DataManagement.DataRepository;
+using _Project.Develop.Runtime.Utilities.DataManagement.KeysStorage;
+using _Project.Develop.Runtime.Utilities.DataManagement.Serializers;
 
-namespace Assets._Project.Develop.Runtime.Utilities.DataManagment
+
+namespace _Project.Develop.Runtime.Utilities.DataManagement
 {
-    public class SaveLoadService : ISaveLoadSerivce
+    public class SaveLoadService : ISaveLoadService
     {
         private readonly IDataSerializer _serializer;
         private readonly IDataKeysStorage _keysStorage;

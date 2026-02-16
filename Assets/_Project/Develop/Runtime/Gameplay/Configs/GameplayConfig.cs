@@ -1,9 +1,8 @@
-using System.Collections.Generic;
 using _Project.Develop.Runtime.Meta;
 using UnityEngine;
 
 
-namespace _Project.Develop.Runtime.Utilities.Config_Management.Configs.Scripts
+namespace _Project.Develop.Runtime.Gameplay.Configs
 {
 	[CreateAssetMenu(menuName = "Gameplay Config", fileName = "GameplayConfig")]
 	public class GameplayConfig : ScriptableObject

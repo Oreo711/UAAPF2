@@ -2,16 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _Project.Develop.Runtime.Gameplay.Configs;
 using _Project.Develop.Runtime.Meta;
+using _Project.Develop.Runtime.Meta.Features.Stats;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
-using _Project.Develop.Runtime.Utilities.Config_Management.Configs.Scripts;
 using _Project.Develop.Runtime.Utilities.CoroutineManagement;
-using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
-using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
-using Assets._Project.Develop.Runtime.Meta.Features.Wallet;
-using Assets._Project.Develop.Runtime.Utilities.DataManagment;
-using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
-using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
+using _Project.Develop.Runtime.Utilities.DataManagement.DataProviders;
+using _Project.Develop.Runtime.Utilities.SceneManagement;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -24,6 +21,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 		private SceneSwitcherService _sceneSwitcher;
 		private ICoroutinePerformer  _coroutinePerformer;
 		private WalletService        _wallet;
+		private StatsService         _stats;
 		private PlayerDataProvider   _playerDataProvider;
 
 		private List<char> _chars;
@@ -33,13 +31,22 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
 		private readonly List<char> _input = new();
 
-		public void Initialize (GameMode gameMode, GameplayConfig config, SceneSwitcherService sceneSwitcher, ICoroutinePerformer coroutinePerformer, WalletService wallet, PlayerDataProvider playerDataProvider)
+		public void Initialize (
+			GameMode gameMode,
+			GameplayConfig config,
+			SceneSwitcherService sceneSwitcher,
+			ICoroutinePerformer coroutinePerformer,
+			WalletService wallet,
+			StatsService stats,
+			PlayerDataProvider playerDataProvider
+		)
 		{
 			_gameMode           = gameMode;
 			_config             = config;
 			_sceneSwitcher      = sceneSwitcher;
 			_coroutinePerformer = coroutinePerformer;
 			_wallet             = wallet;
+			_stats              = stats;
 			_playerDataProvider = playerDataProvider;
 		}
 
@@ -93,7 +100,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 			{
 				_input.Add(inputString[0]);
 
-				Debug.Log(inputString[0]);
+				Debug.Log(inputString[0].ToString());
 
 				if (_sequence.Length == _input.Count)
 				{
@@ -109,6 +116,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 			if (isValidInput)
 			{
 				_wallet.Add(CurrencyTypes.Gold, 10);
+				_stats.IncrementWins();
 
 				yield return _playerDataProvider.Save();
 
@@ -120,11 +128,12 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 			if (_wallet.Enough(CurrencyTypes.Gold, 10))
 			{
 				_wallet.Spend(CurrencyTypes.Gold, 10);
-			}
-			else
+			} else
 			{
 				_wallet.Spend(CurrencyTypes.Gold, _wallet.GetCurrency(CurrencyTypes.Gold).Value);
 			}
+
+			_stats.IncrementLosses();
 
 			yield return _playerDataProvider.Save();
 

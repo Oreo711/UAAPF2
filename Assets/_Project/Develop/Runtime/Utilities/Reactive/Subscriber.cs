@@ -1,6 +1,7 @@
 using System;
 
-namespace Assets._Project.Develop.Runtime.Utilities.Reactive
+
+namespace _Project.Develop.Runtime.Utilities.Reactive
 {
     public class Subscriber<T, K> : IDisposable
     {

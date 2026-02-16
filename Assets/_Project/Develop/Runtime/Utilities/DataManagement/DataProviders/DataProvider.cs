@@ -2,18 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders
+
+namespace _Project.Develop.Runtime.Utilities.DataManagement.DataProviders
 {
     public abstract class DataProvider<TData> where TData : ISaveData
     {
-        private readonly ISaveLoadSerivce _saveLoadService;
+        private readonly ISaveLoadService _saveLoadService;
 
         private readonly List<IDataWriter<TData>> _writers = new();
         private readonly List<IDataReader<TData>> _readers = new();
 
         private TData _data;
 
-        protected DataProvider(ISaveLoadSerivce saveLoadService)
+        protected DataProvider(ISaveLoadService saveLoadService)
         {
             _saveLoadService = saveLoadService;
         }
