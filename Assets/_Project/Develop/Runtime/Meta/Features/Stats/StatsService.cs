@@ -37,12 +37,14 @@ namespace _Project.Develop.Runtime.Meta.Features.Stats
 
 		public void ReadFrom (PlayerData data)
 		{
-			_wins = data.Wins;
+			_wins   = data.Wins;
+			_losses = data.Losses;
 		}
 
 		public void WriteTo (PlayerData data)
 		{
-			data.Wins = _wins;
+			data.Wins   = _wins;
+			data.Losses = _losses;
 		}
 	}
 }
